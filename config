@@ -79,16 +79,16 @@ fi
 
 # Preparse resources
 echo -e "${txtblu}\nPreparing resources${txtrst}"
-cat $up/resources/resources.xml | grep 'preparse="true"' | while read preparse_entry; do
+cat $git_root/resources/resources.xml | grep 'preparse="true"' | while read preparse_entry; do
 	preparse_file=$(echo $preparse_entry | cut -d' ' -f2 | cut -d'"' -f2)
-	if [ -e $up/resources/$preparse_file.md5 ]; then
-		if [ $(md5sum $up/resources/$preparse_file | cut -d' ' -f1) != $(cat $up/resources/$preparse_file.md5) ]; then
-			md5sum $up/resources/$preparse_file | cut -d' ' -f1 > $up/resources/$preparse_file.md5
-			parse_ignorelist_mxcr $up/resources/$preparse_file $up/resources/$preparse_file.mxcr
+	if [ -e $git_root/resources/$preparse_file.md5 ]; then
+		if [ $(md5sum $git_root/resources/$preparse_file | cut -d' ' -f1) != $(cat $git_root/resources/$preparse_file.md5) ]; then
+			md5sum $git_root/resources/$preparse_file | cut -d' ' -f1 > $git_root/resources/$preparse_file.md5
+			parse_ignorelist_mxcr $git_root/resources/$preparse_file $git_root/resources/$preparse_file.mxcr
 		fi
 	else 
-		md5sum $up/resources/$preparse_file | cut -d' ' -f1 > $up/resources/$preparse_file.md5
-		parse_ignorelist_mxcr $up/resources/$preparse_file $up/resources/$preparse_file.mxcr
+		md5sum $git_root/resources/$preparse_file | cut -d' ' -f1 > $git_root/resources/$preparse_file.md5
+		parse_ignorelist_mxcr $git_root/resources/$preparse_file $git_root/resources/$preparse_file.mxcr
 	fi
 done
 

@@ -1,0 +1,97 @@
+#!/bin/bash
+# Copyright (c) 2018, Redmaner
+
+# Python version 2.7 is required for sort.py to work
+# On some linux distributions python2.7 and python3.0 are installed
+# Put your python 2.7 binary name here
+python=python2.7 
+
+# If merge_non_exsisting is enabled, the merge script will merge / copy xml's that are not in the target repo.
+# For example Backup.apk/res/values-nl/strings.xml does not exsist in the target repo, then te merge script
+# will merge it anyway.
+merge_non_exsisting=disabled
+
+# If post_clean is enabled, all strings and arrays that are defined untranslateable will be removed automatically
+post_clean=enabled
+
+# Sync target repo before starting merge
+target_git_pull=disabled
+
+# Max processes: the amount of sub-processes the script is able to run.
+# Feference point is 4 a 6 sub-processes per CPU core.
+max_processes=4
+
+# Merge related variables
+lang_version=9
+lang_name=Dutch
+lang_iso=nl
+lang_iso_framework=nl-rNL
+orig_dir=$git_root/MIUI9/gemini
+orig_dir_second=$git_root/MIUI9/sagit
+dual_merge=true
+dir_mode=auto
+targ_dir=$git_root/Dutch/main
+new_dir=$git_root/Dutch_new/main
+untranslateable_list=$git_root/resources/MIUI9_untranslateable.xml.mxcr
+auto_ignorelist=$git_root/resources/MIUI9_auto_ignorelist.xml
+value_catcher=$up/value_catcher_lean.sh
+blacklist=$up/blacklist
+
+# Sync repo function
+SyncRepo () {
+case "$1" in
+	new)
+	rm -rf $3
+	git clone $2 $3;;
+
+	update) 
+	cd $2; git pull origin $3; cd $up;;
+esac
+}
+
+parse_ignorelist_mxcr () {
+TARGET_FILE=$1
+NEW_FILE=$2
+cat $TARGET_FILE | grep '<item ' | while read ignore_string; do
+	ITEM_FOLDER=$(echo $ignore_string | awk '{print $2}' | cut -d'"' -f2)
+	ITEM_APP=$(echo $ignore_string | awk '{print $3}' | cut -d'"' -f2)
+	ITEM_FILE=$(echo $ignore_string | awk '{print $4}' | cut -d'"' -f2)
+	ITEM_NAME=$(echo $ignore_string | awk '{print $5}' | cut -d'"' -f2)
+	echo ''$ITEM_FOLDER' '$ITEM_APP' '$ITEM_FILE' '$ITEM_NAME' '
+done > $NEW_FILE
+}
+
+# Sync MIUI9 compare
+echo -e "${txtblu}\nSyncing Xiaomi.eu-MIUIv9-XML-Compare (MIUI9)${txtrst}"
+if [ -d $git_root/MIUI9 ]; then 
+	SyncRepo "update" "MIUI9" "master"
+else
+	SyncRepo "new" "https://github.com/ingbrzy/Xiaomi.eu-MIUIv9-XML-Compare" "MIUI9"
+fi
+
+# Sync resources
+echo -e "${txtblu}\nSyncing resources${txtrst}"
+if [ -d $git_root/resources ]; then 
+	SyncRepo "update" "resources" "master"
+else
+	SyncRepo "new" "https://github.com/Redmaner/MA-XML-CHECK-RESOURCES" "resources"
+fi
+
+# Preparse resources
+echo -e "${txtblu}\nPreparing resources${txtrst}"
+cat $up/resources/resources.xml | grep 'preparse="true"' | while read preparse_entry; do
+	preparse_file=$(echo $preparse_entry | cut -d' ' -f2 | cut -d'"' -f2)
+	if [ -e $up/resources/$preparse_file.md5 ]; then
+		if [ $(md5sum $up/resources/$preparse_file | cut -d' ' -f1) != $(cat $up/resources/$preparse_file.md5) ]; then
+			md5sum $up/resources/$preparse_file | cut -d' ' -f1 > $up/resources/$preparse_file.md5
+			parse_ignorelist_mxcr $up/resources/$preparse_file $up/resources/$preparse_file.mxcr
+		fi
+	else 
+		md5sum $up/resources/$preparse_file | cut -d' ' -f1 > $up/resources/$preparse_file.md5
+		parse_ignorelist_mxcr $up/resources/$preparse_file $up/resources/$preparse_file.mxcr
+	fi
+done
+
+# Clean old stuff
+rm -rf $git_root/Dutch_new
+

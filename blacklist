@@ -1,0 +1,21 @@
+miui.apk strings.xml
+miui.apk arrays.xml
+miui.apk plurals.xml
+
+miuisystem.apk strings.xml
+miuisystem.apk arrays.xml
+miuisystem.apk plurals.xml
+
+MiuiFramework.apk strings.xml
+MiuiFramework.apk arrays.xml
+MiuiFramework.apk plurals.xml
+
+framework-ext-res.apk strings.xml
+framework-ext-res.apk arrays.xml
+framework-ext-res.apk plurals.xml
+
+framework-res.apk strings.xml
+framework-res.apk arrays.xml
+framework-res.apk plurals.xml
+
+

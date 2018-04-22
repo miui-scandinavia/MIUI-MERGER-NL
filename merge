@@ -48,7 +48,7 @@ done
 
 # Main event
 SingleMerge () {
-for apk in $(find $orig_dir -iname "*.apk" | sort -rh); do
+find $orig_dir -iname "*.apk" | sort -rh | while read apk; do
 	apk_name=$(basename $apk)
 	if [ -d $targ_dir/$apk_name ] && [ $(cat $blacklist | grep ''$apk_name' strings.xml' | wc -l) == 0 ]; then
 		if [ -f "$orig_dir/$apk_name/res/$values/strings.xml" ] && [ -f "$targ_dir/$apk_name/res/values-$lang_iso/strings.xml" ]; then
@@ -60,7 +60,7 @@ for apk in $(find $orig_dir -iname "*.apk" | sort -rh); do
 done
 wait
 
-for apk in $(find $orig_dir -iname "*.apk" | sort -rh); do
+find $orig_dir -iname "*.apk" | sort -rh | while read apk; do
 	apk_name=$(basename $apk)
 	if [ -d $targ_dir/$apk_name ] && [ $(cat $blacklist | grep ''$apk_name' arrays.xml' | wc -l) == 0 ]; then
 		if [ -f "$orig_dir/$apk_name/res/$values/arrays.xml" ] && [ -f "$targ_dir/$apk_name/res/values-$lang_iso/arrays.xml" ]; then
@@ -72,13 +72,14 @@ for apk in $(find $orig_dir -iname "*.apk" | sort -rh); do
 done
 wait
 
-for apk in $(find $orig_dir -iname "*.apk" | sort -rh); do
+find $orig_dir -iname "*.apk" | sort -rh | while read apk; do
 	apk_name=$(basename $apk)
 	if [ -d $targ_dir/$apk_name ] && [ $(cat $blacklist | grep ''$apk_name' plurals.xml' | wc -l) == 0 ]; then
 		if [ -f "$orig_dir/$apk_name/res/$values/plurals.xml" ] && [ -f "$targ_dir/$apk_name/res/values-$lang_iso/plurals.xml" ]; then
 			max_proces; ($up/merge_plurals $orig_dir/$apk_name/res/$values/plurals.xml $targ_dir/$apk_name/res/values-$lang_iso/plurals.xml $new_dir/$apk_name/res/values-$lang_iso/plurals.xml $apk_name $untranslateable_list)&
 		elif [ -f "$orig_dir/$apk_name/res/$values/plurals.xml" ] && [ ! -f "$targ_dir/$apk_name/res/values-$lang_iso/plurals.xml" ] && [ $merge_non_exsisting == "enabled" ]; then
 			max_proces; ($up/merge_plurals $orig_dir/$apk_name/res/$values/plurals.xml $up/dummy.xml $new_dir/$apk_name/res/values-$lang_iso/plurals.xml $apk_name $untranslateable_list)&
+		fi
 	fi
 done
 wait

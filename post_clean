@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source .configuration
 UNTRANSLATEABLE_LIST=$untranslateable_list
 AUTO_IGNORELIST=$auto_ignorelist
 LANG_VERSION=$lang_version
@@ -9,7 +8,7 @@ source $value_catcher
 xml_remove_string () {
 STRING_NAME=$1
 if [ $(sed -e '/name="'$STRING_NAME'"/!d' $XML_TARGET | wc -l) -gt 0 ]; then
-	echo "Cleaning $XML_TARGET"
+	#echo "Cleaning $XML_TARGET"
 	if [ $(sed -e '/name="'$STRING_NAME'"/!d' $XML_TARGET | grep '</string>' | wc -l) -gt 0 ]; then
 		sed -e '/<string name="'$STRING_NAME'"/d' $XML_TARGET >> $XML_TARGET.fixed; mv $XML_TARGET.fixed $XML_TARGET
 	elif [ $(sed -e '/name="'$STRING_NAME'"/!d' $XML_TARGET | grep '/>' | wc -l) -gt 0 ]; then
@@ -24,7 +23,7 @@ xml_remove_array () {
 ARRAY_NAME=$1
 ARRAY_TYPE=$(cat $XML_TARGET | grep 'name="'$ARRAY_NAME'"' | cut -d'<' -f2 | cut -d' ' -f1)
 if [ $(sed -e '/name="'$ARRAY_NAME'"/!d' $XML_TARGET | wc -l) -gt 0 ]; then
-	echo "Cleaning $XML_TARGET"
+	#echo "Cleaning $XML_TARGET"
 	sed -e '/name="'$ARRAY_NAME'"/,/'$ARRAY_TYPE'/d' $XML_TARGET >> $XML_TARGET.fixed; mv $XML_TARGET.fixed $XML_TARGET
 fi
 }

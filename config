@@ -26,8 +26,8 @@ lang_version=9
 lang_name=Dutch
 lang_iso=nl
 lang_iso_framework=nl-rNL
-orig_dir=$git_root/MIUI9/gemini
-orig_dir_second=$git_root/MIUI9/sagit
+orig_dir=$git_root/MIUI9/sagit
+orig_dir_second=$git_root/MIUI9/gemini
 dual_merge=true
 dir_mode=auto
 targ_dir=$git_root/Dutch/main
@@ -64,7 +64,7 @@ done > $NEW_FILE
 # Sync MIUI9 compare
 echo -e "${txtblu}\nSyncing Xiaomi.eu-MIUIv9-XML-Compare (MIUI9)${txtrst}"
 if [ -d $git_root/MIUI9 ]; then 
-	SyncRepo "update" "MIUI9" "master"
+	SyncRepo "update" "$git_root/MIUI9" "master"
 else
 	SyncRepo "new" "https://github.com/ingbrzy/Xiaomi.eu-MIUIv9-XML-Compare" "MIUI9"
 fi
@@ -72,7 +72,7 @@ fi
 # Sync resources
 echo -e "${txtblu}\nSyncing resources${txtrst}"
 if [ -d $git_root/resources ]; then 
-	SyncRepo "update" "resources" "master"
+	SyncRepo "update" "$git_root/resources" "master"
 else
 	SyncRepo "new" "https://github.com/Redmaner/MA-XML-CHECK-RESOURCES" "resources"
 fi

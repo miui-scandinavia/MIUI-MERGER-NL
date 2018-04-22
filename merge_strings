@@ -18,11 +18,6 @@ case `uname -s` in
 esac
 
 up=$PWD
-if [ ! -f $up/bools ]; then
-	echo -e "ERROR: bools file not detected\nCopy bools.default to bools and edit it to your needs\nThen run merge again"; exit
-else
-	source $up/bools
-fi
 
 MergeStrings () {
 mkdir -p $new_string_dir
@@ -47,7 +42,7 @@ sed -e '/string name="/!d' $orig_string | cut -d'"' -f2 | uniq --unique | while 
 		fi
 	fi
 done
-if [ $dual_merge == true ]; then
+if [ "$dual_merge" == true ]; then
 	sed -e '/string name="/!d' $orig_string_second| cut -d'"' -f2 | uniq --unique | while read string_name; do
 		if [ $(sed -e '/name="'$string_name'"/!d' $orig_string | wc -l) -gt 0 ]; then
 			continue

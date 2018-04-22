@@ -31,6 +31,10 @@ welcome_notes_
 aqi_title
 express_status_
 audio_effect_file_names
+Ndays_
+prefValues_max_bytes_limit
+video_type
+screenrecorder_settings_
 EOF
 }
 
@@ -69,5 +73,14 @@ alipay_
 flybird_
 msp_secure_key_
 msp_symbol_
+unit_data_short_
+"ae_
+tw_
+config_export_
+help_url_people_
+DOWNLOAD_UNIT_
+mini_
+msp_
+mishopsdk_
 EOF
 }

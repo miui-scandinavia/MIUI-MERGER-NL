@@ -1,21 +1,43 @@
-miui.apk strings.xml
-miui.apk arrays.xml
-miui.apk plurals.xml
-
-miuisystem.apk strings.xml
-miuisystem.apk arrays.xml
-miuisystem.apk plurals.xml
-
-MiuiFramework.apk strings.xml
-MiuiFramework.apk arrays.xml
-MiuiFramework.apk plurals.xml
-
-framework-ext-res.apk strings.xml
-framework-ext-res.apk arrays.xml
-framework-ext-res.apk plurals.xml
-
+Backup.apk arrays.xml
+Browser.apk arrays.xml
+Calculator.apk arrays.xml
+Calendar.apk arrays.xml
+Cit.apk strings.xml
+Cit.apk arrays.xml
+Cit.apk plurals.xml
+CleanMaster.apk arrays.xml
+ContactsProvider.apk arrays.xml
+DownloadProvider.apk arrays.xml
+FileExplorer.apk arrays.xml
 framework-res.apk strings.xml
 framework-res.apk arrays.xml
 framework-res.apk plurals.xml
-
-
+framework-ext-res.apk strings.xml
+framework-ext-res.apk arrays.xml
+framework-ext-res.apk plurals.xml
+GuardProvider.apk arrays.xml
+InCallUI.apk arrays.xml
+ManagedProvisioning.apk arrays.xml
+miui.apk strings.xml
+miui.apk arrays.xml
+miui.apk plurals.xml
+MiuiCamera.apk arrays.xml
+MiuiCompass.apk arrays.xml
+MiuiFramework.apk strings.xml
+MiuiFramework.apk arrays.xml
+MiuiFramework.apk plurals.xml
+MiuiKeyguard.apk arrays.xml
+MiuiScanner.apk arrays.xml
+miuisystem.apk strings.xml
+miuisystem.apk arrays.xml
+miuisystem.apk plurals.xml
+MiuiVideoGlobal.apk arrays.xml
+Music.apk arrays.xml
+NfcNci.apk arrays.xml
+PrintRecommendationService.apk strings.xml
+PrintRecommendationService.apk arrays.xml
+Provision.apk arrays.xml
+QuickSearchBox.apk arrays.xml
+TelephonyProvider.apk arrays.xml
+Whetstone.apk arrays.xml
+imssettings.apk arrays.xml

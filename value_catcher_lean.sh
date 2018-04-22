@@ -27,6 +27,10 @@ region_support_volte
 devices_support_ct_volte
 batterymeter_bolt_points
 batterymeter_plus_points
+welcome_notes_
+aqi_title
+express_status_
+audio_effect_file_names
 EOF
 }
 

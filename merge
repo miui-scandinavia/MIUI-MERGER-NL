@@ -82,6 +82,7 @@ for apk in $(find $orig_dir -iname "*.apk" | sort -rh); do
 	fi
 done
 wait
+}
 
 # Main event dual merge
 DualMerge () {

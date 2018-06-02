@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copyright (c) 2018, Redmaner
 
-VERSION=18.04.22NL
+VERSION=18.06.02NL
 up=$PWD/merge
 git_root=$PWD
 

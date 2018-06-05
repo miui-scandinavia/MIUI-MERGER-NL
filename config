@@ -22,18 +22,18 @@ target_git_pull=disabled
 max_processes=4
 
 # Merge related variables
-lang_version=9
+lang_version=10
 lang_name=Dutch
 lang_iso=nl
 lang_iso_framework=nl-rNL
-orig_dir=$git_root/MIUI9/sagit
-orig_dir_second=$git_root/MIUI9/gemini
+orig_dir=$git_root/MIUI10/sagit
+orig_dir_second=$git_root/MIUI10/gemini
 dual_merge=true
 dir_mode=auto
 targ_dir=$git_root/Dutch/main
 new_dir=$git_root/Dutch_new/main
-untranslateable_list=$git_root/resources/MIUI9_untranslateable.xml.mxcr
-auto_ignorelist=$git_root/resources/MIUI9_auto_ignorelist.xml
+untranslateable_list=$git_root/resources/MIUI10/MIUI10_untranslateable.xml.mxcr
+auto_ignorelist=$git_root/resources/MIUI10/MIUI10_auto_ignorelist.xml
 value_catcher=$up/value_catcher_lean.sh
 blacklist=$up/blacklist
 
@@ -62,11 +62,11 @@ done > $NEW_FILE
 }
 
 # Sync MIUI9 compare
-echo -e "${txtblu}\nSyncing Xiaomi.eu-MIUIv9-XML-Compare (MIUI9)${txtrst}"
-if [ -d $git_root/MIUI9 ]; then 
-	SyncRepo "update" "$git_root/MIUI9" "master"
+echo -e "${txtblu}\nSyncing Xiaomi.eu-MIUIv10-XML-Compare (MIUI10)${txtrst}"
+if [ -d $git_root/MIUI10 ]; then 
+	SyncRepo "update" "$git_root/MIUI10" "master"
 else
-	SyncRepo "new" "https://github.com/ingbrzy/Xiaomi.eu-MIUIv9-XML-Compare" "MIUI9"
+	SyncRepo "new" "https://github.com/ingbrzy/Xiaomi.eu-MIUIv10-XML-Compare" "MIUI10"
 fi
 
 # Sync resources
